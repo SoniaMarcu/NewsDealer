@@ -1,20 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React , {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-//import { Icon } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
-import {createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigation-drawer';
+import CustomHeader from "../shared/CustomHeader";
+import ShowNews from "../news/ShowNews"; // 0.16.0
 
 class HomeScreen extends Component{
     render(){
         return (
-            <View style={styles.header}>
+            <View style={{flex:1}} >
 
-              <Ionicons name="md-menu" size={32} color="grey" onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}  style={{margin: 20}}/>
-              <View style={styles.container}>
-
-                          <Text>HomeScreen</Text>
+            <CustomHeader navigation={ this.props.navigation }/>
+{/*//              <Ionicons name="md-menu" size={32} color="grey" onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}  style={{margin: 20}}/>*/}
+              <View style={styles.container} >
                           <StatusBar style="auto" />
+                          <ShowNews/>
                         </View>
             </View>
 
@@ -33,5 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+      width: '100%',
+      minHeight: '100%'
   },
 });

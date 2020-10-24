@@ -5,46 +5,74 @@ import {createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigati
 import { StackNavigator, createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack'
 import HomeScreen from './screens/HomeScreen';
-import SettingsScreen from './screens/SettingsScreen';
+import PreferencesScreen from './screens/PreferencesScreen';
 import SideMenu from './drawer';
 import {AppRegistry} from 'react-native';
 import DrawerComponent from './drawer';
+import {Header} from "react-native-elements";
+import BookmarksScreen from "./screens/BookmarksScreen";
 
 
-export default function App() {
-  return (
-    <MainNavigator/>
-  );
+class App extends Component {
+  render() {
+
+    return (
+
+          <MainNavigator/>
+
+    );
+  }
+
 }
-  const MyApp = createStackNavigator(
+
+export  default App;
+
+
+const MyApp = createStackNavigator(
     {
       Home: {
         screen: HomeScreen,
         navigationOptions: {
           header: {
-            visible: false
+            visible: true
           }
         }
       },
       Settings: {
-        screen: SettingsScreen,
+        screen: PreferencesScreen,
         navigationOptions: {
           header: {
-            visible: false
+            visible: true
+          }
+        }
+      },
+        Bookmarks: {
+        screen: BookmarksScreen,
+        navigationOptions: {
+          header: {
+            visible: true
           }
         }
       }
-      }
+    },
+   {
+     initialRouteName: "HomeScreen"
+   })
+
+
+
+
 //    },
 //    {
 //      initialRouteName: "HomeScreen"
 //    }
-  );
+
 
 const MainNavigator = createAppContainer(createDrawerNavigator({
 
   Home: {screen: HomeScreen},
-  Settings:  {screen: SettingsScreen }
+  Preferences:  {screen: PreferencesScreen },
+  Bookmarks : {screen : BookmarksScreen}
 },{
   drawerWidth: 300,
   contentComponent: DrawerComponent,
