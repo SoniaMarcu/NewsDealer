@@ -40,9 +40,13 @@ render() {
 
         const newsList=news.map(n=> {
             return (
-                <Card style={{flex:1, backgroundColor:'#A9FFC2', margin: 20}} key={n.id}>
-                    <Card.Title title={n.title} subtitle="Card Subtitle"/>
+                <Card style={{flex:1, backgroundColor:'#ebe6e6', margin: 20, shadowColor: "#000",
+                    shadowOffset: {width: 1, height: 2},
+                    shadowOpacity: 0.3 }} key={n.id}>
+                    <Card.Title subtitle={"card subtitle"} style={{minHeight: 10, marginTop: 10}}/>
+                    {/*<Card.Title title={n.title}/>*/}
                     <Card.Content>
+                        <Title>{n.title}</Title>
                         <Paragraph numberOfLines={4}>{n.body}</Paragraph>
                     </Card.Content>
                     <Card.Actions>

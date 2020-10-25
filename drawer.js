@@ -22,15 +22,15 @@ class DrawerComponent extends Component {
         <ScrollView>
        <TouchableOpacity
                    onPress={() => this.props.navigation.navigate('Home')}>
-                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#26A65B', color: "#fff"}}>Home</Text>
+                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Home</Text>
                  </TouchableOpacity>
                  <TouchableOpacity
                    onPress={() => this.props.navigation.navigate('Preferences')}>
-                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#26A65B', color: "#fff"}}>Preferences</Text>
+                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Preferences</Text>
                  </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => this.props.navigation.navigate('Bookmarks')}>
-                    <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#26A65B', color:"#fff"}}>Bookmarks</Text>
+                    <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color:"#fff"}}>Bookmarks</Text>
                   </TouchableOpacity>
         </ScrollView>
       </View>

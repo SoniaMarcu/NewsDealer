@@ -9,7 +9,7 @@ const CustomHeader = (navigation)=>{
         <Header
 
             containerStyle={{
-                backgroundColor: "#26A65B",
+                backgroundColor: "#280359",
                 justifyContent: "space-around"
             }}
             placement="left"
