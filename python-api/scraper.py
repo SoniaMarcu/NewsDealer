@@ -14,6 +14,9 @@ class Websites(Enum):
     CNN = ("https://edition.cnn.com/", ["//article/div/div/h3/a[contains(@href, 'index.html')]",
                                         "//article/div/div/h3/a[contains(@href, '/videos/')]"])
     BBC = ("https://www.bbc.com/", ["//a[@class='media__link']"])
+    THEVERGE=("https://www.theverge.com/", ["//h2/a[contains(@data-analytics-link, 'article')]"])
+    THE_DAILY_BEAST=("https://www.thedailybeast.com/", ["//h2/a[starts-with(@class, 'TrackingLink')]"])
+    THE_ATLANTIC=("https://www.theatlantic.com/world/", ["//h2[not(contains(@class, 'section'))]/a"])
     # NBC = "https://www.nbcnews.com/"
 
 
@@ -63,3 +66,7 @@ class Scraper:
         articles = {"articles": articles}
         with open('articles.json', 'w') as file:
             json.dump(articles, file, ensure_ascii=False)
+
+
+scraper= Scraper()
+scraper.extract_articles()
