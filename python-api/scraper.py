@@ -69,7 +69,7 @@ class Scraper:
         articles = {"articles": articles}
         with open('articles.json', 'w') as file:
             json.dump(articles, file, ensure_ascii=False)
-        self.scraping_done=True
+        Scraper.scraping_done=True
 
     @staticmethod
     def run():
