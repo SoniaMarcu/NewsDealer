@@ -1,8 +1,7 @@
 import json
 import re
 from enum import Enum
-import threading
-import time
+
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.chrome.options import Options
@@ -34,6 +33,27 @@ class Scraper:
     def __del__(self):
         self.driver.close()
 
+    def get_description_from_article(self, articles):
+        descriptions = []
+        for article in articles:
+            self.driver.get(article)
+            try:
+                if self.driver.find_element_by_xpath("//button").text == "Yes, I agree":
+                    self.driver.find_element_by_xpath("//button").click()
+            except:
+                pass
+            WebDriverWait(self.driver, 20).until(ec.visibility_of_any_elements_located((By.TAG_NAME, "body")))
+            len_desc=len(descriptions)
+            elems=str(self.driver.find_element_by_tag_name("body").text).split('\n')
+            for elem in elems:
+                if len(elem)>120:
+                    descriptions.append(elem)
+                    break
+            if len_desc==len(descriptions):
+                descriptions.append("")
+            print(descriptions[len(descriptions)-1])
+        return descriptions
+
     def get_articles_on(self, website):
         website_name = website.value[0]
         xpaths = website.value[1]
@@ -56,9 +76,9 @@ class Scraper:
         website = re.search('https://(www\\.)?([^/]*)/?', website_name).group(2)
 
         print("Number of articles on " + website + ": ", len(names))
-
-        articles = [{"id": art_id, "name": name, "description": "", "website": website, "url": url} for
-                    name, url, art_id in zip(names, urls, range(1, len(names) + 1))]
+        descriptions=self.get_description_from_article(urls)
+        articles = [{"id": art_id, "name": name, "description": descriptions, "website": website, "url": url} for
+                    name, url, art_id, description in zip(names, urls, range(1, len(names) + 1),descriptions)]
         return articles
 
     def extract_articles(self):
