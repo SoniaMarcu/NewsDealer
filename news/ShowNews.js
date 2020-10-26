@@ -13,12 +13,13 @@ class ShowNews extends Component {
     }
     componentDidMount() {
         // no need to put an async/await, you can still use promises
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('http://127.0.0.1:5000/getUnfilteredArticles')
             .then(response=> {
                 console.log(response)
                 this.setState({
-                    news: response.data.slice(0, 10)
+                    news: response.data.articles.slice(0, 10)
                 })
+                console.log(this.getState)
 
             }).catch(function (error) {
             console.log(error);
@@ -43,11 +44,11 @@ render() {
                 <Card style={{flex:1, backgroundColor:'#ebe6e6', margin: 20, shadowColor: "#000",
                     shadowOffset: {width: 1, height: 2},
                     shadowOpacity: 0.3 }} key={n.id}>
-                    <Card.Title subtitle={"card subtitle"} style={{minHeight: 10, marginTop: 10}}/>
+                    <Card.Title subtitle={n.website} style={{minHeight: 10, marginTop: 10}}/>
                     {/*<Card.Title title={n.title}/>*/}
                     <Card.Content>
-                        <Title>{n.title}</Title>
-                        <Paragraph numberOfLines={4}>{n.body}</Paragraph>
+                        <Title>{n.name}</Title>
+                        <Paragraph numberOfLines={4}>{n.description}</Paragraph>
                     </Card.Content>
                     <Card.Actions>
                        <Button>READ NEWS</Button>

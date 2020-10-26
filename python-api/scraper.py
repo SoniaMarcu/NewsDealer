@@ -1,7 +1,8 @@
 import json
 import re
 from enum import Enum
-
+import threading
+import time
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.chrome.options import Options
@@ -21,6 +22,8 @@ class Websites(Enum):
 
 
 class Scraper:
+    scraping_done=False
+
     def __init__(self):
         options = Options()
         options.add_argument("--headless --start-maximized")
@@ -66,7 +69,17 @@ class Scraper:
         articles = {"articles": articles}
         with open('articles.json', 'w') as file:
             json.dump(articles, file, ensure_ascii=False)
+        self.scraping_done=True
 
+    @staticmethod
+    def run():
+        while True:
+            t1 = threading.Thread(target=Scraper().extract_articles)
+            t1.start()
+            time.sleep(3000000)
 
-scraper= Scraper()
-scraper.extract_articles()
+    def get_articles(self):
+        if(Scraper.scraping_done):
+            return open("articles.json")
+        else:
+            return open("default-articles.json")
