@@ -26,15 +26,6 @@ async function addBookmark(news) {
         AsyncStorage.setItem('BOOKMARKS2', JSON.stringify(filteredBookmarks)).then(console.log("SUCCESSFULLY ADDED BOOKMARK"))
     }
 
-        // let bl=[]
-        // bl.push(news)
-        // AsyncStorage.setItem('BOOKMARKS2', JSON.stringify(bl)).then(async ()=>{
-        //     const a= await AsyncStorage.getItem('BOOKMARKS2');
-        //     console.log(a);
-        //     console.log(JSON.parse(a))
-        //
-        // })
-
 }
 
 const NewsCard = (props)=>{
