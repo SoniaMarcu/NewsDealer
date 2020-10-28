@@ -1,6 +1,7 @@
 import json
 import re
 import threading
+import time
 from enum import Enum
 
 from selenium import webdriver
@@ -15,14 +16,12 @@ class Websites(Enum):
     CNN = ("https://edition.cnn.com/", ["//article/div/div/h3/a[contains(@href, 'index.html')]",
                                         "//article/div/div/h3/a[contains(@href, '/videos/')]"])
     BBC = ("https://www.bbc.com/", ["//a[@class='media__link']"])
-    THEVERGE=("https://www.theverge.com/", ["//h2/a[contains(@data-analytics-link, 'article')]"])
-    THE_DAILY_BEAST=("https://www.thedailybeast.com/", ["//h2/a[starts-with(@class, 'TrackingLink')]"])
-    THE_ATLANTIC=("https://www.theatlantic.com/world/", ["//h2[not(contains(@class, 'section'))]/a"])
-    # NBC = "https://www.nbcnews.com/"
+    THE_ATLANTIC = ("https://www.theatlantic.com/world/", ["//h2[not(contains(@class, 'section'))]/a"])
+    THE_VERGE = ("https://www.theverge.com/", ["//h2/a[contains(@data-analytics-link, 'article')]"])
 
 
 class Scraper:
-    scraping_done=False
+    scraping_done = False
 
     def __init__(self):
         options = Options()
@@ -38,21 +37,32 @@ class Scraper:
         descriptions = []
         for article in articles:
             self.driver.get(article)
-            try:
-                if self.driver.find_element_by_xpath("//button").text == "Yes, I agree":
-                    self.driver.find_element_by_xpath("//button").click()
-            except:
-                pass
+            consent_button_candidates = self.driver.find_elements_by_xpath("//button")
+            for consent_button_candidate in consent_button_candidates:
+                expected_button_texts = ["Yes, I agree", "I Accept"]
+                for expected_button_text in expected_button_texts:
+                    try:
+                        actual_button_text = consent_button_candidate.text
+                        assert actual_button_text == expected_button_text
+                        consent_button_candidate.click()
+                        break
+                    except AssertionError:
+                        pass
+                    except StaleElementReferenceException:
+                        pass
+
             WebDriverWait(self.driver, 20).until(ec.visibility_of_any_elements_located((By.TAG_NAME, "body")))
-            len_desc=len(descriptions)
-            elems=str(self.driver.find_element_by_tag_name("body").text).split('\n')
-            for elem in elems:
-                if len(elem)>120:
+            len_desc = len(descriptions)
+            elements = str(self.driver.find_element_by_tag_name("body").text).split('\n')
+            for elem in elements:
+                if len(elem) > 120:
                     descriptions.append(elem)
                     break
-            if len_desc==len(descriptions):
+            if len_desc == len(descriptions):
                 descriptions.append("")
-            print(descriptions[len(descriptions)-1])
+            if len(descriptions) == 1:
+                print(descriptions[0])
+
         return descriptions
 
     def get_articles_on(self, website):
@@ -77,9 +87,9 @@ class Scraper:
         website = re.search('https://(www\\.)?([^/]*)/?', website_name).group(2)
 
         print("Number of articles on " + website + ": ", len(names))
-        descriptions=self.get_description_from_article(urls)
+        descriptions = self.get_description_from_article(urls)
         articles = [{"id": art_id, "name": name, "description": descriptions, "website": website, "url": url} for
-                    name, url, art_id, description in zip(names, urls, range(1, len(names) + 1),descriptions)]
+                    name, url, art_id, description in zip(names, urls, range(1, len(names) + 1), descriptions)]
         return articles
 
     def extract_articles(self):
@@ -90,7 +100,7 @@ class Scraper:
         articles = {"articles": articles}
         with open('articles.json', 'w') as file:
             json.dump(articles, file, ensure_ascii=False)
-        Scraper.scraping_done=True
+        Scraper.scraping_done = True
 
     @staticmethod
     def run():
@@ -99,8 +109,9 @@ class Scraper:
             t1.start()
             time.sleep(3000000)
 
-    def get_articles(self):
-        if(Scraper.scraping_done):
+    @staticmethod
+    def get_articles():
+        if Scraper.scraping_done:
             return open("articles.json")
         else:
             return open("default-articles.json")
