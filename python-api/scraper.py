@@ -3,6 +3,7 @@ import re
 import threading
 import time
 from enum import Enum
+from filter import NLPFilter
 
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
@@ -27,6 +28,7 @@ class Scraper:
         options = Options()
         options.add_argument("--headless --start-maximized")
         # options.add_argument("--start-maximized")
+        self.nlp_filter = NLPFilter()
         self.driver = webdriver.Chrome("drivers/chromedriver.exe", options=options)
         self.driver.implicitly_wait(2)
 
@@ -88,8 +90,11 @@ class Scraper:
 
         print("Number of articles on " + website + ": ", len(names))
         descriptions = self.get_description_from_article(urls)
-        articles = [{"id": art_id, "name": name, "description": descriptions, "website": website, "url": url} for
-                    name, url, art_id, description in zip(names, urls, range(1, len(names) + 1), descriptions)]
+        categories = self.nlp_filter.get_categories(names)
+        articles = [{"id": art_id, "name": name, "category": category, "description": descriptions, "website": website,
+                     "url": url} for
+                    name, url, art_id, description, category in
+                    zip(names, urls, range(1, len(names) + 1), descriptions, categories)]
         return articles
 
     def extract_articles(self):
