@@ -91,7 +91,7 @@ class Scraper:
         print("Number of articles on " + website + ": ", len(names))
         descriptions = self.get_description_from_article(urls)
         categories = self.nlp_filter.get_categories(names)
-        articles = [{"id": art_id, "name": name, "category": category, "description": descriptions, "website": website,
+        articles = [{"id": art_id, "name": name, "category": category, "description": description, "website": website,
                      "url": url} for
                     name, url, art_id, description, category in
                     zip(names, urls, range(1, len(names) + 1), descriptions, categories)]
