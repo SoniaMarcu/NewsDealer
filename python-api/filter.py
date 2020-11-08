@@ -1,4 +1,5 @@
-#import nltk
+import json
+
 import gensim
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -6,8 +7,10 @@ import numpy as np
 
 
 class NLPFilter:
-    def __init__(self):
-        self.model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
+    def __init__(self, load_model=True):
+        if load_model:
+            self.model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin',
+                                                                         binary=True)
         self.possible_categories = ['world', 'politics government diplomacy ministry election state country',
                                     'business work', 'fitness health lifestyle wellness',
                                     'technology science robotics computers automation', 'sports play game',
@@ -43,9 +46,30 @@ class NLPFilter:
         try:
             shit_formula = np.divide(scores.sum(axis=0), len(words)) + scores.max(axis=0)
         except:
-            shit_formula =[0,0]
+            shit_formula = [0, 0]
         if max(shit_formula) >= 0.4:
             to_return = self.categories_names[np.where(shit_formula == max(shit_formula))[0][0]]
         else:
             to_return = "World"
         return to_return
+
+    @staticmethod
+    def filter_articles_by_preferences(preferences):
+        """Reads the articles from the articles.json file, filters them according to the preferences
+            and saves the result to filtered-articles.json
+            Args:
+                preferences: Dictionary of preferences
+            Returns:
+                Nothing
+        """
+        fav_categories = preferences["categories"]
+        fav_websites = preferences["websites"]
+
+        with open('articles.json') as json_file:
+            data = json.load(json_file)
+            filtered_articles = [article for article in data['articles'] if
+                                 article['category'] in fav_categories and article['website'] in fav_websites]
+
+        filtered_articles = {"articles": filtered_articles}
+        with open('filtered-articles.json', 'w') as outfile:
+            json.dump(filtered_articles, outfile)
