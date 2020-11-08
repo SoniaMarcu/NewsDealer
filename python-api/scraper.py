@@ -99,7 +99,7 @@ class Scraper:
         articles = [{"id": art_id, "name": name, "category": category, "description": description, "website": website,
                      "url": url} for
                     name, url, art_id, description in
-                    zip(names, urls, range(1, len(names) + 1), descriptions)]
+                    zip(names, urls, range(1, len(names) + 1), descriptions, categories)]
         return articles
 
     def extract_articles(self):
