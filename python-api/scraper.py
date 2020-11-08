@@ -15,7 +15,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class Websites(Enum):
     CNN = ("https://edition.cnn.com/", ["//article/div/div/h3/a[contains(@href, 'index.html')]",
-                                        "//article/div/div/h3/a[contains(@href, '/videos/')]"])
+                                       "//article/div/div/h3/a[contains(@href, '/videos/')]"])
     BBC = ("https://www.bbc.com/", ["//a[@class='media__link']"])
     THE_ATLANTIC = ("https://www.theatlantic.com/world/", ["//h2[not(contains(@class, 'section'))]/a"])
     THE_VERGE = ("https://www.theverge.com/", ["//h2/a[contains(@data-analytics-link, 'article')]"])
@@ -98,7 +98,7 @@ class Scraper:
         categories = self.nlp_filter.get_categories(names)
         articles = [{"id": art_id, "name": name, "category": category, "description": description, "website": website,
                      "url": url} for
-                    name, url, art_id, description in
+                    name, url, art_id, description, category in
                     zip(names, urls, range(1, len(names) + 1), descriptions, categories)]
         return articles
 

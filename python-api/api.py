@@ -20,3 +20,4 @@ def get_articles():
 def get_unfiltered_articles():
     scraper = Scraper()
     return Response(scraper.get_articles(), 200)
+
