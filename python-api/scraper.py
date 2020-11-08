@@ -3,11 +3,10 @@ import re
 import threading
 import time
 from enum import Enum
-from filter import NLPFilter
 
+from filter import NLPFilter
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
@@ -25,8 +24,6 @@ class Scraper:
     scraping_done = False
 
     def __init__(self):
-        #options = Options()
-        #options.add_argument("--start-maximized")
         self.nlp_filter = NLPFilter()
         options = webdriver.ChromeOptions()
         options.add_argument("--headless --start-maximized")
@@ -35,7 +32,6 @@ class Scraper:
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.driver = webdriver.Chrome("drivers/chromedriver.exe", options=options)
         self.driver.implicitly_wait(2)
-
 
     def __del__(self):
         self.driver.close()
