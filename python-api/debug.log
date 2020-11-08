@@ -21,3 +21,38 @@
 [1027/200845.095:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1027/200854.221:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 
+[1108/195510.005:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1108/200614.105:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/200614.107:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/200614.107:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/200614.108:ERROR:exception_snapshot_win.cc(99)] thread ID 17144 not found in process
+[1108/200614.250:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/200614.250:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/200614.250:ERROR:exception_snapshot_win.cc(99)] thread ID 1808 not found in process
+[1108/203530.178:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.183:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.183:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/203530.187:ERROR:exception_snapshot_win.cc(99)] thread ID 18592 not found in process
+[1108/203530.298:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.299:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.300:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.300:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.300:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.300:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203530.300:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/203530.300:ERROR:exception_snapshot_win.cc(99)] thread ID 1480 not found in process
+[1108/203723.636:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.637:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.637:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.637:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/203723.638:ERROR:exception_snapshot_win.cc(99)] thread ID 17700 not found in process
+[1108/203723.691:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.691:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/203723.691:ERROR:exception_snapshot_win.cc(99)] thread ID 10812 not found in process
+[1108/203723.708:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.708:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.708:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.708:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.708:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1108/203723.708:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1108/203723.708:ERROR:exception_snapshot_win.cc(99)] thread ID 7576 not found in process

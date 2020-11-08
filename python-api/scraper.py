@@ -25,12 +25,17 @@ class Scraper:
     scraping_done = False
 
     def __init__(self):
-        options = Options()
-        options.add_argument("--headless --start-maximized")
-        # options.add_argument("--start-maximized")
+        #options = Options()
+        #options.add_argument("--start-maximized")
         self.nlp_filter = NLPFilter()
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless --start-maximized")
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--ignore-ssl-errors')
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.driver = webdriver.Chrome("drivers/chromedriver.exe", options=options)
         self.driver.implicitly_wait(2)
+
 
     def __del__(self):
         self.driver.close()
@@ -41,7 +46,7 @@ class Scraper:
             self.driver.get(article)
             consent_button_candidates = self.driver.find_elements_by_xpath("//button")
             for consent_button_candidate in consent_button_candidates:
-                expected_button_texts = ["Yes, I agree", "I Accept"]
+                expected_button_texts = ["Yes, I agree", "I Accept", "Accept All"]
                 for expected_button_text in expected_button_texts:
                     try:
                         actual_button_text = consent_button_candidate.text
@@ -91,10 +96,10 @@ class Scraper:
         print("Number of articles on " + website + ": ", len(names))
         descriptions = self.get_description_from_article(urls)
         categories = self.nlp_filter.get_categories(names)
-        articles = [{"id": art_id, "name": name, "category": category, "description": descriptions, "website": website,
+        articles = [{"id": art_id, "name": name, "category": category, "description": description, "website": website,
                      "url": url} for
-                    name, url, art_id, description, category in
-                    zip(names, urls, range(1, len(names) + 1), descriptions, categories)]
+                    name, url, art_id, description in
+                    zip(names, urls, range(1, len(names) + 1), descriptions)]
         return articles
 
     def extract_articles(self):
