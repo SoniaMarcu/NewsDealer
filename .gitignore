@@ -18,3 +18,4 @@ python-api/debug.log
 # macOS
 .DS_Store
 .python-api/debug.log
+.python-api/*.bin
