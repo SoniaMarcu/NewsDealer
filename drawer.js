@@ -25,8 +25,8 @@ class DrawerComponent extends Component {
                    <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Home</Text>
                  </TouchableOpacity>
                  <TouchableOpacity
-                   onPress={() => this.props.navigation.navigate('Preferences')}>
-                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Preferences</Text>
+                   onPress={() => this.props.navigation.navigate('CategoryPreferences')}>
+                   <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Category Preferences</Text>
                  </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => this.props.navigation.navigate('Bookmarks')}>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import NewsCard from './NewsCard';
 
@@ -10,18 +11,26 @@ class ShowNews extends Component {
     state={
         news:[]
     }
-    componentDidMount() {
-        axios.get('http://127.0.0.1:5000/getUnfilteredArticles')
-            .then(response=> {
-                console.log(response)
-                this.setState({
-                    news: response.data.articles.slice(0, 10)
-                })
-                console.log(this.getState)
+    async componentDidMount() {
+        try{
+            let categoryPreferences= await AsyncStorage.getItem("CATEGORY_PREFERENCES");
+            categoryPreferences= JSON.parse(categoryPreferences);
+            let jsonCategoriesDict={"categories": categories}
 
-            }).catch(function (error) {
-            console.log(error);
-        });
+            axios.get('http://127.0.0.1:5000/getUnfilteredArticles')
+                .then(response=> {
+                    console.log(response)
+                    this.setState({
+                        news: response.data.articles.slice(0, 10)
+                    })
+                    console.log(this.getState)
+                }).catch(function (error) {
+                console.log(error);
+            });
+        }catch (e) {
+            return
+        }
+        
     }
 
 

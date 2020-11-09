@@ -106,6 +106,8 @@ class Scraper:
         articles = {"articles": articles}
         with open('articles.json', 'w') as file:
             json.dump(articles, file, ensure_ascii=False)
+        with open('default_articles.json', 'w') as file:
+                    json.dump(articles, file, ensure_ascii=False)
         Scraper.scraping_done = True
 
     @staticmethod

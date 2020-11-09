@@ -5,6 +5,10 @@ import CustomHeader from "../shared/CustomHeader";
 import ShowNews from "../news/ShowNews"; // 0.16.0
 
 class HomeScreen extends Component{
+
+
+
+
     render(){
         return (
             <View style={{flex:1}} >

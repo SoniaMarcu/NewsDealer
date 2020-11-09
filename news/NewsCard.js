@@ -19,11 +19,9 @@ async function addBookmark(news) {
             await AsyncStorage.setItem('BOOKMARKS2', JSON.stringify(bookmarks))
             return
         }
-        let filteredBookmarks = bookmarks.filter(b=> b.id !== news.id)
+        let filteredBookmarks = bookmarks.filter(b=> b.url !== news.url)
         filteredBookmarks.push(news)
-
-
-        AsyncStorage.setItem('BOOKMARKS2', JSON.stringify(filteredBookmarks)).then(console.log("SUCCESSFULLY ADDED BOOKMARK"))
+       await AsyncStorage.setItem('BOOKMARKS2', JSON.stringify(filteredBookmarks)).then(console.log("SUCCESSFULLY ADDED BOOKMARK"));
     }
 
 }

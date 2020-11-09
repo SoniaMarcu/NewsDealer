@@ -1,22 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React , {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigation-drawer';
 import CustomHeader from "../shared/CustomHeader";
-import Preferences from "../preferences/Preferences";
-class PreferencesScreen extends Component{
+import CategoryPreferences from "../preferences/CategoryPreferences";
+class CategoryPreferencesScreen extends Component{
     render(){
         return (
             <View style={{flex:1}} >
                 <CustomHeader navigation={ this.props.navigation }/>
 
                         {/*<Ionicons name="md-menu" size={32} color="grey" onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}  style={{margin: 20}}/>*/}
-                        <View >
+                        <ScrollView style={{flex:1, width: '100%'}} >
 
                                     <StatusBar style="auto" />
-                                    <Preferences/>
-                                  </View>
+                                    <CategoryPreferences/>
+                                  </ScrollView>
                       </View>
 
           );
@@ -25,7 +25,7 @@ class PreferencesScreen extends Component{
  
 }
 
-export default PreferencesScreen;
+export default CategoryPreferencesScreen;
 
 const styles = StyleSheet.create({
   container: {
