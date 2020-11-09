@@ -9,10 +9,10 @@ class WebsitePreferences extends Component {
     state = {
 
         websites: {
-            cnn:{name: "BBC", value:false} ,
-            bbc:{name: "BBC", value:false} ,
-            the_atlantic: {name: "BBC", value:false},
-            the_verge: {name: "BBC", value:false}
+            cnn:{name: "edition.cnn.com", value:false} ,
+            bbc:{name: "bbc.com", value:false} ,
+            the_atlantic: {name: "theatlantic.com", value:false},
+            the_verge: {name: "theverge.com", value:false}
         }
 
 
@@ -20,37 +20,35 @@ class WebsitePreferences extends Component {
 
 
     async componentDidMount() {
-        let categoryPreferences;
         try {
-            var categoriesList = await AsyncStorage.getItem("CATEGORY_PREFERENCES")
-            if (categoriesList !== null) {
-                console.log(
-                    categoriesList
+            var favouriteWebsites = await AsyncStorage.getItem("WEBSITE_PREFERENCES")
+            if (favouriteWebsites !== null) {
+                console.log("not null",
+                    favouriteWebsites
                 )
-                let categs = {...this.state.categories}
-                categoriesList= JSON.parse(categoriesList)
-                categoriesList.map(c => {
-                        console.log(c);
-                        Object.values(categs).map((cat, index) => {
-                            if (cat.name === c) {
+                let websites = {...this.state.websites}
+                favouriteWebsites= JSON.parse(favouriteWebsites)
+                favouriteWebsites.map(w => {
+                        console.log(w);
+                        Object.values(websites).map((web, index) => {
+                            if (web.name === w) {
                                 console.log("true")
-                                cat.value = true;
+                                web.value = true;
                             }
                         })
                     }
                 )
-                this.setState({categories: categs})
+                this.setState({categories: websites})
                 this.render()
 
             } else {
-                categoryPreferences = AsyncStorage.set("CATEGORY_PREFERENCES");
-                AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify([]));
+                AsyncStorage.set("WEBSITE_PREFERENCES");
+                AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify([]));
             }
 
         } catch (e) {
             console.log(e)
-            AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify([]));
-
+            AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify([]));
         }
 
         console.log(this.state);
@@ -63,11 +61,11 @@ class WebsitePreferences extends Component {
     }
 
     setup(){
-        let categoryPreferences= {...this.state.categories}
-        let res= Object.values(categoryPreferences).map((cat, index)=>{
-            return(<CheckBox key={cat.name}
-                             title={cat.name}
-                             checked={cat.value}
+        let websitePreferences= {...this.state.websites}
+        let res= Object.values(websitePreferences).map((web, index)=>{
+            return(<CheckBox key={web.name}
+                             title={web.name}
+                             checked={web.value}
                              onPress={() => {
                                  this.setNewPreferences(index);
                              }
@@ -90,34 +88,34 @@ class WebsitePreferences extends Component {
 
     setNewPreferences(index){
         console.log(index)
-        let categoryPreferences= {...this.state.categories};
-        let res= Object.values(this.state.categories).map((cat, ind)=>{
+        let websitePref= {...this.state.websites};
+        let res= Object.values(this.state.websites).map((web, ind)=>{
             if(index===ind){
-                cat.value=!cat.value;
-                this.setCategoryPreferences(cat.name, cat.value);
+                web.value=!web.value;
+                this.setCategoryPreferences(web.name, web.value);
             }
-            return cat;
+            return web;
 
         })
-        this.setState({categories: res})
-        console.log(this.state.categories)
+        this.setState({websites: res})
+        console.log(this.state.websites)
 
     }
 
 
-    async setCategoryPreferences(categoryName, added){
+    async setCategoryPreferences(websiteName, added){
         if(added==true){
-            let categoryPreferences= await AsyncStorage.getItem("CATEGORY_PREFERENCES");
-            categoryPreferences=JSON.parse(categoryPreferences);
-            categoryPreferences.push(categoryName);
-            await AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify(categoryPreferences))
-            console.log("i ADDED IN ASYNC ", categoryPreferences)
+            let websitePreferences= await AsyncStorage.getItem("WEBSITE_PREFERENCES");
+            websitePreferences=JSON.parse(websitePreferences);
+            websitePreferences.push(websiteName);
+            await AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify(websitePreferences))
+            console.log("i ADDED IN ASYNC ", websitePreferences)
         }else{
-            let categoryPreferences= await AsyncStorage.getItem("CATEGORY_PREFERENCES");
-            categoryPreferences=JSON.parse(categoryPreferences);
-            categoryPreferences= categoryPreferences.filter(cat=> cat!=categoryName)
-            await AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify(categoryPreferences))
-            console.log("i DELETED  FROM ASYNC ", categoryPreferences)
+            let websitePreferences= await AsyncStorage.getItem("WEBSITE_PREFERENCES");
+            websitePreferences=JSON.parse(websitePreferences);
+            websitePreferences= websitePreferences.filter(cat=> cat!=websiteName)
+            await AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify(websitePreferences))
+            console.log("i DELETED  FROM ASYNC ", websitePreferences)
 
         }
     }

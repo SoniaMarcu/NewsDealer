@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React , {Component} from 'react';
 import { StyleSheet, Text, View , ScrollView} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import {createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigation-drawer';
+
 import CustomHeader from "../shared/CustomHeader";
-import CategoryPreferences from "../preferences/CategoryPreferences";
-class PreferencesScreen extends Component{
+import WebsitePreferences from "../preferences/WebsitePreferences";
+class WebsitePreferencesScreen extends Component{
     render(){
         return (
             <View style={{flex:1}} >
@@ -15,7 +14,7 @@ class PreferencesScreen extends Component{
                 <ScrollView style={{flex:1, width: '100%'}} >
 
                     <StatusBar style="auto" />
-                    <CategoryPreferences/>
+                    <WebsitePreferences/>
                 </ScrollView>
             </View>
 
@@ -25,7 +24,7 @@ class PreferencesScreen extends Component{
 
 }
 
-export default PreferencesScreen;
+export default WebsitePreferencesScreen;
 
 const styles = StyleSheet.create({
     container: {

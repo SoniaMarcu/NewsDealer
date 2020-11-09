@@ -12,12 +12,30 @@ class ShowNews extends Component {
         news:[]
     }
     async componentDidMount() {
+        let categoryPreferences=[];
+        let websitePeferences=[];
         try{
-            let categoryPreferences= await AsyncStorage.getItem("CATEGORY_PREFERENCES");
-            categoryPreferences= JSON.parse(categoryPreferences);
-            let jsonCategoriesDict={"categories": categories}
+            try{
+                categoryPreferences = await AsyncStorage.getItem("CATEGORY_PREFERENCES");
+                categoryPreferences= JSON.parse(categoryPreferences);
+            }catch (e) {
+                console.log(e);
+                AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify([]));
+            }
+            try{
+                    websitePeferences= await AsyncStorage.getItem("WEBSITE_PREFERENCES");
+                    websitePeferences=JSON.parse(websitePeferences);
+            }catch (e) {
+                console.log(e);
+                AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify([]));
+            }
 
-            axios.get('http://127.0.0.1:5000/getUnfilteredArticles')
+            let jsonCategoriesDict={"categories": categoryPreferences}
+            let jsonWebsitesDict={ "websites": websitePeferences }
+            axios.post('http://127.0.0.1:5000/getFilteredArticles', {
+                'categories': categoryPreferences,
+                'websites': websitePeferences
+            })
                 .then(response=> {
                     console.log(response)
                     this.setState({

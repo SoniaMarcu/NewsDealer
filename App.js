@@ -6,11 +6,13 @@ import { StackNavigator, createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack'
 import HomeScreen from './screens/HomeScreen';
 import CategoryPreferencesScreen from './screens/CategoryPreferencesScreen';
+import WebsitePreferencesScreen from './screens/WebsitePreferencesScreen';
 import SideMenu from './drawer';
 import {AppRegistry} from 'react-native';
 import DrawerComponent from './drawer';
 import {Header} from "react-native-elements";
 import BookmarksScreen from "./screens/BookmarksScreen";
+import WebsitePreferences from "./preferences/WebsitePreferences";
 
 
 class App extends Component {
@@ -32,7 +34,8 @@ const MainNavigator = createAppContainer(createDrawerNavigator({
 
   Home: {screen: HomeScreen},
   CategoryPreferences:  {screen: CategoryPreferencesScreen },
-  Bookmarks : {screen : BookmarksScreen}
+  Bookmarks : {screen : BookmarksScreen},
+  WebsitePreferences: {screen: WebsitePreferencesScreen }
 },{
   drawerWidth: 300,
   contentComponent: DrawerComponent,

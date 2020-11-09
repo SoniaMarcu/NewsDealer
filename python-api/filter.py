@@ -64,6 +64,8 @@ class NLPFilter:
         """
         fav_categories = preferences["categories"]
         fav_websites = preferences["websites"]
+        print(fav_categories)
+        print(fav_websites)
 
         with open('articles.json') as json_file:
             data = json.load(json_file)

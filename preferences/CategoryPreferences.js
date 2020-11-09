@@ -41,7 +41,6 @@ class CategoryPreferences extends Component {
                         console.log(c);
                         Object.values(categs).map((cat, index) => {
                             if (cat.name === c) {
-                                console.log("true")
                                 cat.value = true;
                             }
                         })
@@ -51,7 +50,6 @@ class CategoryPreferences extends Component {
                 this.render()
 
             } else {
-                categoryPreferences = AsyncStorage.set("CATEGORY_PREFERENCES");
                 AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify([]));
             }
 
