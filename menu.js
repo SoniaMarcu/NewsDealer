@@ -19,9 +19,6 @@ class MenuHeader extends Component {
        <Ionicons name="md-menu" size={32} color="grey" onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())} />
 
        </View>
-
-
-
     );
   }
 }

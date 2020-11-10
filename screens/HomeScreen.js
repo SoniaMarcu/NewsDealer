@@ -7,20 +7,24 @@ import ShowNews from "../news/ShowNews"; // 0.16.0
 class HomeScreen extends Component{
 
 
+    componentDidMount(){
+        console.log("I print from mount")
+
+        this.render();
+    }
 
 
     render(){
+        console.log("I print from render")
         return (
             <View style={{flex:1}} >
 
             <CustomHeader navigation={ this.props.navigation }/>
-{/*//              <Ionicons name="md-menu" size={32} color="grey" onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}  style={{margin: 20}}/>*/}
               <View style={styles.container} >
                           <StatusBar style="auto" />
                           <ShowNews/>
                         </View>
             </View>
-
 
           );
     }
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-      width: '100%',
-      minHeight: '100%'
+      width: '100%'
+      // minHeight: '100%'
   },
 });

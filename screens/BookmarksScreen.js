@@ -4,6 +4,7 @@ import CustomHeader from "../shared/CustomHeader";
 import {Button, Card, Paragraph, Title} from "react-native-paper";
 import NewsCard from "../news/NewsCard";
 import AsyncStorage from '@react-native-community/async-storage';
+import BookmarkCard from "../news/BookmarkCard";
 
 
 export default class BookmarksScreen extends Component{
@@ -37,7 +38,7 @@ export default class BookmarksScreen extends Component{
                     //     </Card.Actions>
                     // </Card>
                     //
-                    <NewsCard news={bookmark} key={bookmark.id}></NewsCard>
+                    <BookmarkCard news={bookmark} key={bookmark.id}></BookmarkCard>
                 )
             })
 
@@ -51,8 +52,7 @@ export default class BookmarksScreen extends Component{
         return (
             <View style={{flex:1}}>
                 <CustomHeader navigation={ this.props.navigation }/>
-                <ScrollView style={{flex:1, width: '100%',
-                    minHeight: '100%'}}>
+                <ScrollView style={{flex:1, width: '100%'}}>
                 <View>
                     {this.state["bookmarks"]}
                 </View>

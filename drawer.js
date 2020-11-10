@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import {createDrawerNavigator, DrawerActions, DrawerItems } from 'react-navigation-drawer';
+
 import { withNavigation } from 'react-navigation';
 
 class DrawerComponent extends Component {
@@ -21,7 +20,7 @@ class DrawerComponent extends Component {
           <View/>
         <ScrollView>
        <TouchableOpacity
-                   onPress={() => this.props.navigation.navigate('Home')}>
+                   onPress={() => {this.props.navigation.navigate('Home'); setTimeout(()=> window.location.reload(), 0)}}>
                    <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Home</Text>
                  </TouchableOpacity>
                  <TouchableOpacity
