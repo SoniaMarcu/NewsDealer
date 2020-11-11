@@ -15,7 +15,7 @@ class ShowNews extends Component {
         console.log("I print from mount --- show news")
 
         let categoryPreferences=[];
-        let websitePeferences=[];
+        let websitePreferences=[];
         try{
             try{
                 categoryPreferences = await AsyncStorage.getItem("CATEGORY_PREFERENCES");
@@ -25,18 +25,18 @@ class ShowNews extends Component {
                 AsyncStorage.setItem("CATEGORY_PREFERENCES", JSON.stringify([]));
             }
             try{
-                    websitePeferences= await AsyncStorage.getItem("WEBSITE_PREFERENCES");
-                    websitePeferences=JSON.parse(websitePeferences);
+                    websitePreferences= await AsyncStorage.getItem("WEBSITE_PREFERENCES");
+                    websitePreferences=JSON.parse(websitePreferences);
             }catch (e) {
                 console.log(e);
                 AsyncStorage.setItem("WEBSITE_PREFERENCES", JSON.stringify([]));
             }
 
             let jsonCategoriesDict={"categories": categoryPreferences}
-            let jsonWebsitesDict={ "websites": websitePeferences }
+            let jsonWebsitesDict={ "websites": websitePreferences }
             axios.post('http://127.0.0.1:5000/getFilteredArticles', {
                 'categories': categoryPreferences,
-                'websites': websitePeferences
+                'websites': websitePreferences
             })
                 .then(response=> {
                     console.log(response)

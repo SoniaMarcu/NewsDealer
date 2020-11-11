@@ -18,9 +18,3 @@ def get_articles():
     nlp_filter.filter_articles_by_preferences(preferences)
 
     return Response(open("filtered-articles.json"), 200)
-
-
-@app.route("/getUnfilteredArticles", methods=["GET"])
-def get_unfiltered_articles():
-    scraper = Scraper()
-    return Response(scraper.get_articles(), 200)

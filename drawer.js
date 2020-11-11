@@ -20,7 +20,7 @@ class DrawerComponent extends Component {
           <View/>
         <ScrollView>
        <TouchableOpacity
-                   onPress={() => {this.props.navigation.navigate('Home'); setTimeout(()=> window.location.reload(), 0)}}>
+                   onPress={() => {this.props.navigation.navigate('Home');}}>
                    <Text style= {{fontSize: 25, padding: 20, backgroundColor: '#280359', color: "#fff"}}>Home</Text>
                  </TouchableOpacity>
                  <TouchableOpacity

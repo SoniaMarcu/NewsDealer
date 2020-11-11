@@ -1,5 +1,6 @@
 node_modules/**/*
-.idea/
+.idea/*
+.idea
 .expo/*
 npm-debug.*
 *.jks
@@ -13,9 +14,8 @@ web-build/
 venv/
 node_modules/
 .expo/
-python-api/debug.log
-.python-api/debug.log
-.python-api/*.bin
+/python-api/debug.log
+/python-api/*.bin
 /python-api/GoogleNews-vectors-negative300.bin
 
 # macOS
