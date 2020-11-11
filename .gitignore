@@ -14,8 +14,9 @@ venv/
 node_modules/
 .expo/
 python-api/debug.log
+.python-api/debug.log
+.python-api/*.bin
+/python-api/GoogleNews-vectors-negative300.bin
 
 # macOS
 .DS_Store
-.python-api/debug.log
-.python-api/*.bin

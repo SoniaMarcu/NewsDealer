@@ -64,13 +64,15 @@ class NLPFilter:
         """
         fav_categories = preferences["categories"]
         fav_websites = preferences["websites"]
-        print(fav_categories)
-        print(fav_websites)
+        print("Categories:", fav_categories)
+        print("Websites:", fav_websites)
 
         with open('articles.json') as json_file:
             data = json.load(json_file)
-            filtered_articles = [article for article in data['articles'] if
-                                 article['category'] in fav_categories and article['website'] in fav_websites]
+            filtered_articles = []
+            if len(data['articles']) and fav_categories is not None and fav_websites is not None:
+                filtered_articles = [article for article in data['articles'] if
+                                     article['category'] in fav_categories and article['website'] in fav_websites]
 
         filtered_articles = {"articles": filtered_articles}
         with open('filtered-articles.json', 'w') as outfile:
